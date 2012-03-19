@@ -1,0 +1,12 @@
+*.tds
+*.obj
+*.exe
+*.class
+*.pyc
+*.pyd
+*.etc
+*.zip
+.git
+.git/*
+bin
+bin/*
