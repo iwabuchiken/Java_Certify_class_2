@@ -1,5 +1,5 @@
 /************************************
- * STDLIB.java 
+ * Sub1_Sample_1_2.java 
  * Author: iwabuchiken 
  * Date: 2012/2012/03/07/8:24:32 
  * Aim: 
@@ -53,6 +53,11 @@ public class STDLIB {
 		 * 6. generate an array made up of dirs below n1 (a2)
 		 * 7. turn a2 into a string (s1)
 		 * 8. return s1
+		 * 
+		 * <Example>
+		 * STDLIB.get_project_path(
+		 * 		STDLIB.get_file_absolute_path(STDLIB.get_file_name()),
+		 * 		)
 		 */
 		/* 1			*/
 		System.out.println("<enter: get_project_path()>");
@@ -110,4 +115,45 @@ public class STDLIB {
 		
 		return temp;
 	}//public static String substitute_chars()
-}
+	
+	public static String get_package_name(Object obj) {
+		return obj.getClass().getPackage().getName();
+	}//get_package_name()
+	
+	/**
+	 * 
+	 * @param object
+	 * @return
+	 * 
+	 * <Example>
+	 * 	1. get_project_path(new Member())
+	 * 		=> "try_1\t12\q7"
+	 * <Notice>
+	 * 	1. If the package name is null ("") => this method is not
+	 * 			yet up to that case.
+	 */
+	public static String get_project_path(Object object) {
+		String		string	= null;		/* project path string		*/
+		/* get the package name: '.' separator format		*/
+		string = get_package_name(object);
+		
+		/* replace the package separator '.' with the system separator	*/ 
+		string = substitute_chars(string, '.', '\\');
+		
+		return string;
+		
+	}//get_project_path()
+	
+	public static String get_project_path_to_file(Object object, String file_name) {
+		/* get package name				*/
+		String		package_name		= get_package_name(object);
+		
+		/* replace "." separator with "\"		*/
+		package_name = substitute_chars(package_name, '.', '\\');
+		
+		return String.format("%s%s%s", 
+				package_name, File.separator, file_name);
+	}//get_project_path_to_file()
+
+
+}//public class STDLIB
